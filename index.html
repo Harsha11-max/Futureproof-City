@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1519">
+  <meta name="description" content="Futureproof City: explore how urban decisions ripple across neighborhoods in a transparent, interactive resilience simulator.">
+  <title>Futureproof City — Design tomorrow, today.</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="model.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to simulator</a>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#studio" aria-label="Futureproof City home">
+        <span class="brand-symbol" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+        <span class="brand-copy">FUTURE<span>PROOF</span><small>CITY SYSTEMS LAB</small></span>
+      </a>
+      <div class="sidebar-section-label">WORKSPACE / 01</div>
+      <nav class="side-nav" aria-label="Workspace">
+        <button class="nav-item active" type="button" data-view="studio"><span class="nav-glyph">◈</span> Scenario studio <span class="nav-count">01</span></button>
+        <button class="nav-item" type="button" data-view="saved"><span class="nav-glyph">▤</span> Saved futures <span id="savedCount" class="nav-count">00</span></button>
+        <button class="nav-item" type="button" data-view="notes"><span class="nav-glyph">◎</span> Model notes <span class="nav-count">↗</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="transmission"><span class="live-dot"></span> SANDBOX ONLINE <span>LOCAL / NO API</span></div>
+        <div class="bottom-card"><span class="micro-label">A LITTLE REMINDER</span><p>Every future begins with one decision.</p><span class="bottom-decoration" aria-hidden="true">✳</span></div>
+        <p class="copyright">© 2026 FUTUREPROOF CITY<br>AN OPEN SOURCE EXPERIMENT</p>
+      </div>
+    </aside>
+
+    <main id="main" class="main-content">
+      <header class="topbar">
+        <div class="breadcrumb"><span>EXPERIMENTS</span><span class="slash">/</span><strong id="currentViewName">SCENARIO STUDIO</strong></div>
+        <div class="top-actions"><span class="edition">FIELD EDITION <b>001</b></span><button id="howButton" class="small-outline" type="button">HOW THIS WORKS <span aria-hidden="true">↗</span></button></div>
+      </header>
+
+      <section id="studioView" class="view" aria-label="Scenario studio">
+        <div class="page-heading">
+          <div><div class="eyebrow"><span class="asterisk">✳</span> THE URBAN FUTURES EXPERIMENT</div><h1>What if your city<br><em>could think ahead?</em></h1><p class="intro">A living sandbox for the choices that shape tomorrow. Invest a limited budget, prepare for a crisis, and watch the impact unfold—neighborhood by neighborhood.</p></div>
+          <div class="hero-graphic" aria-hidden="true"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="orbit orbit-c"></div><span class="orbit-core">✦</span><span class="orbit-point orbit-point-a"></span><span class="orbit-point orbit-point-b"></span></div>
+        </div>
+
+        <div class="scenario-bar">
+          <div class="scenario-intro"><span class="micro-label">01 / CHOOSE A THREAT</span><strong>What are we preparing for?</strong></div>
+          <div id="hazardTabs" class="hazard-tabs" role="group" aria-label="Choose a crisis">
+            <button type="button" class="hazard-tab active" data-hazard="heat" aria-pressed="true"><span class="hazard-icon">☀</span><span>Heatwave</span></button>
+            <button type="button" class="hazard-tab" data-hazard="flood" aria-pressed="false"><span class="hazard-icon">≋</span><span>Flash flood</span></button>
+            <button type="button" class="hazard-tab" data-hazard="blackout" aria-pressed="false"><span class="hazard-icon">ϟ</span><span>Grid outage</span></button>
+          </div>
+        </div>
+
+        <div class="metrics-grid" aria-live="off">
+          <article class="metric-card emphasis"><div class="metric-top"><span>RESILIENCE INDEX</span><span class="metric-icon">↗</span></div><div class="metric-value"><strong id="readinessValue">—</strong><span>/ 100</span></div><p id="readinessDelta">—</p><div class="metric-track"><div id="readinessFill" class="metric-fill"></div></div></article>
+          <article class="metric-card"><div class="metric-top"><span>RISK REDUCED</span><span class="metric-icon">↘</span></div><div class="metric-value"><strong id="riskReductionValue">—</strong><span>points</span></div><p>vs. a city with no investments</p><div class="metric-corner">◌</div></article>
+          <article class="metric-card"><div class="metric-top"><span>EXPOSURE INDEX</span><span class="metric-icon">◎</span></div><div class="metric-value"><strong id="exposureValue">—</strong><span>people*</span></div><p>risk-weighted estimate, not a forecast</p><div class="metric-corner">⋮</div></article>
+          <article class="metric-card"><div class="metric-top"><span>BUDGET AVAILABLE</span><span class="metric-icon">⊕</span></div><div class="metric-value"><strong id="remainingValue">—</strong><span>credits</span></div><p id="spentCaption">—</p><div class="budget-dots" id="budgetDots" aria-hidden="true"></div></article>
+        </div>
+
+        <div class="work-grid">
+          <section class="panel map-panel" aria-labelledby="mapTitle">
+            <div class="panel-heading"><div><span class="micro-label">02 / SEE THE SYSTEM</span><h2 id="mapTitle">Your city, alive<span class="period">.</span></h2></div><div class="map-head-status"><span class="pulse"></span> LIVE MODEL <b id="hazardTag">HEAT</b></div></div>
+            <div class="map-intro"><p id="hazardDescription">Explore how risk changes across six districts.</p><div class="map-legend"><span><i class="legend-steady"></i>LOWER</span><span><i class="legend-elevated"></i>ELEVATED</span><span><i class="legend-critical"></i>HIGHER</span></div></div>
+            <div class="city-map-wrap"><svg id="cityMap" class="city-map" viewBox="0 0 900 440" role="group" aria-label="Interactive illustrative city risk map. Select a district for its details."></svg><div class="map-grid-code">CITY GRID / 06 DISTRICTS<br>MODELED, NOT GEOGRAPHIC</div><div class="map-compass">N <span>↑</span></div></div>
+            <div class="district-detail" id="districtDetail" aria-live="polite"><span>SELECT A DISTRICT</span></div>
+          </section>
+
+          <section class="panel investment-panel" aria-labelledby="investmentsTitle">
+            <div class="panel-heading"><div><span class="micro-label">03 / ALLOCATE YOUR RESOURCES</span><h2 id="investmentsTitle">Make your move<span class="period">.</span></h2></div><span class="budget-label"><span id="budgetSpentSmall">90</span>/100</span></div>
+            <p class="investment-sub">You have 100 credits. Every decision has a cost, and every crisis rewards a different strategy.</p>
+            <div class="budget-progress" role="progressbar" aria-label="Budget used" aria-valuemin="0" aria-valuemax="100" aria-valuenow="90" id="budgetProgress"><div id="budgetProgressFill"></div></div>
+            <div id="leverControls" class="lever-list">
+              <div class="lever" data-lever="trees"><div class="lever-label"><div class="lever-icon trees-icon">✳</div><div><label for="trees">Urban tree canopy</label><small>Cools streets and adds shade</small></div></div><output for="trees" id="treesOutput">30</output><input id="trees" type="range" min="0" max="100" value="30" step="1" aria-label="Credits allocated to urban trees"></div>
+              <div class="lever" data-lever="drainage"><div class="lever-label"><div class="lever-icon drainage-icon">≋</div><div><label for="drainage">Smart drainage</label><small>Moves stormwater safely</small></div></div><output for="drainage" id="drainageOutput">25</output><input id="drainage" type="range" min="0" max="100" value="25" step="1" aria-label="Credits allocated to drainage"></div>
+              <div class="lever" data-lever="backup"><div class="lever-label"><div class="lever-icon backup-icon">ϟ</div><div><label for="backup">Backup microgrids</label><small>Keeps essential services on</small></div></div><output for="backup" id="backupOutput">20</output><input id="backup" type="range" min="0" max="100" value="20" step="1" aria-label="Credits allocated to backup power"></div>
+              <div class="lever" data-lever="hubs"><div class="lever-label"><div class="lever-icon hubs-icon">⌂</div><div><label for="hubs">Community hubs</label><small>Helps neighbors respond faster</small></div></div><output for="hubs" id="hubsOutput">15</output><input id="hubs" type="range" min="0" max="100" value="15" step="1" aria-label="Credits allocated to community hubs"></div>
+            </div>
+            <div class="preset-area"><span class="micro-label">QUICK STRATEGIES</span><div class="preset-list"><button type="button" data-preset="balanced">Balanced ↗</button><button type="button" data-preset="green">Green-first ↗</button><button type="button" data-preset="flood">Flood-ready ↗</button><button type="button" data-preset="grid">Grid-safe ↗</button></div></div>
+            <div class="recommendation"><span class="recommend-icon">✦</span><div><span class="micro-label">NEXT BEST MOVE · MODEL SUGGESTION</span><p id="recommendationText">—</p></div></div>
+          </section>
+        </div>
+
+        <div class="lower-grid">
+          <section class="panel district-panel" aria-labelledby="riskTitle"><div class="panel-heading"><div><span class="micro-label">04 / UNDER THE SURFACE</span><h2 id="riskTitle">Who needs attention?</h2></div><span class="subtle-tag">DISTRICT RISK / 100</span></div><div id="riskBars" class="risk-bars" aria-label="District risk ranking"></div></section>
+          <section class="panel trajectory-panel" aria-labelledby="trajectoryTitle"><div class="panel-heading"><div><span class="micro-label">05 / LOOK FORWARD</span><h2 id="trajectoryTitle">The ripple effect</h2></div><span class="subtle-tag">12 MONTH ROLLOUT</span></div><p class="trajectory-sub">A hypothetical rollout of your chosen investments over one year.</p><svg id="timelineChart" class="timeline-chart" viewBox="0 0 540 200" role="img" aria-label="Chart of modeled resilience index through 12 months"></svg><div class="chart-axis"><span>MONTH 00</span><span>MONTH 06</span><span>MONTH 12</span></div><div id="timelineCaption" class="timeline-caption">—</div></section>
+        </div>
+        <div class="action-bar"><div><span class="micro-label">HAPPY WITH THIS FUTURE?</span><p>Save a version, export the data, or start fresh. The choices are yours.</p></div><div class="action-buttons"><button id="resetButton" class="outline-action" type="button">↺ Reset</button><button id="exportButton" class="outline-action" type="button">⇩ Export report</button><button id="saveButton" class="primary-action" type="button">✳ Save this future <span>↗</span></button></div></div>
+        <p class="disclaimer">* All scores, populations, districts and intervention effects are fictional educational examples, not validated forecasts. No real-world safety decisions should be based on this simulation.</p>
+      </section>
+
+      <section id="savedView" class="view secondary-view" hidden aria-labelledby="savedTitle">
+        <div class="eyebrow"><span class="asterisk">✳</span> YOUR ALTERNATIVE TOMORROWS</div><h1 id="savedTitle">A collection of<br><em>possible futures.</em></h1><p class="intro">Save different investments, then reopen any scenario to explore how its choices play out. Your work stays in this browser.</p>
+        <div id="savedList" class="saved-list"></div>
+        <div class="secondary-footer"><button class="primary-action" type="button" data-view="studio">← Back to the studio</button></div>
+      </section>
+
+      <section id="notesView" class="view secondary-view" hidden aria-labelledby="notesTitle">
+        <div class="eyebrow"><span class="asterisk">✳</span> TRANSPARENCY IS A FEATURE</div><h1 id="notesTitle">No magic.<br><em>Just a model.</em></h1><p class="intro">This is an interactive thought experiment built around clear, inspectable rules. Here's what happens under the hood.</p>
+        <div class="notes-grid"><article class="note-card"><span>01 / DATA</span><h3>Six imagined districts.</h3><p>Each has a fictional population, hazard vulnerability, and local effectiveness modifiers. The map is deliberately abstract.</p></article><article class="note-card"><span>02 / DECISIONS</span><h3>A fixed 100-credit budget.</h3><p>Invest in trees, drainage, backup microgrids, or community hubs. More investment brings diminishing returns.</p></article><article class="note-card"><span>03 / OUTPUT</span><h3>Scores, not predictions.</h3><p>Weighted neighborhood risk creates the city index. The exposure index is a risk-weighted count, not an estimate of actual people harmed.</p></article><article class="note-card"><span>04 / TRUST</span><h3>Nothing leaves your browser.</h3><p>No accounts, analytics, external APIs or hidden AI. Scenarios save only to your device, with an option to export JSON.</p></article></div>
+        <div class="formula-card"><span class="micro-label">SIMULATION RULE / SIMPLIFIED</span><p>District risk = baseline vulnerability − Σ ( √ investment share × crisis weight × district modifier × 41 )</p><small>Clamped to a 6–98 score range. City resilience = 100 − population-weighted average district risk. Exact coefficients are readable in <code>model.js</code>.</small></div>
+        <div class="secondary-footer"><button class="primary-action" type="button" data-view="studio">← Back to the studio</button></div>
+      </section>
+      <footer class="page-footer"><span>MADE FOR CURIOUS MINDS AND BETTER QUESTIONS.</span><span>THINK BIG. START SMALL. ↗</span></footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
